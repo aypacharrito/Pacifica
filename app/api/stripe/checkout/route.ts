@@ -34,8 +34,8 @@ export async function POST(request: Request) {
     const session = await stripe.checkout.sessions.create({
       ...common,
       mode: "payment",
-      line_items: [{ price_data: { currency: "usd", unit_amount: 50000, product_data: { name: "Pacifica annual membership — paid in full" } }, quantity: 1 }],
-      metadata: { clerk_user_id: userId, terms_version: TERMS_VERSION, billing_plan: "annual_500" },
+      line_items: [{ price_data: { currency: "usd", unit_amount: 52988, product_data: { name: "Pacifica annual membership — paid in full" } }, quantity: 1 }],
+      metadata: { clerk_user_id: userId, terms_version: TERMS_VERSION, billing_plan: "annual_52988" },
     });
     redirect(session.url!);
   }
@@ -44,11 +44,11 @@ export async function POST(request: Request) {
     ...common,
     mode: "subscription",
     line_items: [
-      { price_data: { currency: "usd", unit_amount: 3182, recurring: { interval: "month" }, product_data: { name: "Pacifica annual membership installment" } }, quantity: 1 },
-      { price_data: { currency: "usd", unit_amount: 11818, product_data: { name: "Enrollment payment" } }, quantity: 1 },
+      { price_data: { currency: "usd", unit_amount: 3999, recurring: { interval: "month" }, product_data: { name: "Pacifica annual membership installment" } }, quantity: 1 },
+      { price_data: { currency: "usd", unit_amount: 5000, product_data: { name: "Enrollment fee" } }, quantity: 1 },
     ],
-    metadata: { clerk_user_id: userId, terms_version: TERMS_VERSION, billing_plan: "150_then_10x3182_then_3180" },
-    subscription_data: { metadata: { clerk_user_id: userId, terms_version: TERMS_VERSION, billing_plan: "150_then_10x3182_then_3180", final_credit_applied: "false" } },
+    metadata: { clerk_user_id: userId, terms_version: TERMS_VERSION, billing_plan: "50_plus_12x3999" },
+    subscription_data: { metadata: { clerk_user_id: userId, terms_version: TERMS_VERSION, billing_plan: "50_plus_12x3999" } },
   });
   redirect(session.url!);
 }

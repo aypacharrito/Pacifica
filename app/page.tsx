@@ -6,7 +6,7 @@ const features = [
   ["✓", "Trusted protection", "Practical legal support when it matters most."],
   ["♙", "Experienced attorneys", "Your matter is routed to the right legal professional."],
   ["▣", "Secure & private", "Your documents stay organized in one protected place."],
-  ["◇", "Clear & transparent", "$500 annually—pay in full or choose a clearly defined installment plan."],
+  ["◇", "Clear & transparent", "$529.88 annually—or $50 enrollment plus twelve monthly payments of $39.99."],
 ];
 
 export default async function Home() {

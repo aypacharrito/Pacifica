@@ -28,15 +28,10 @@ export async function POST(request: Request) {
     const subscriptionId = typeof rawSubscription === "string" ? rawSubscription : rawSubscription?.id;
     if (subscriptionId) {
       const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-      if (subscription.metadata.billing_plan === "150_then_10x3182_then_3180") {
+      if (subscription.metadata.billing_plan === "50_plus_12x3999") {
         const invoices = await stripe.invoices.list({ subscription: subscriptionId, status: "paid", limit: 100 });
         const paidInstallments = invoices.data.filter(item => item.billing_reason === "subscription_create" || item.billing_reason === "subscription_cycle").length;
-        if (paidInstallments >= 10 && subscription.metadata.final_credit_applied !== "true") {
-          const customerId = typeof subscription.customer === "string" ? subscription.customer : subscription.customer.id;
-          await stripe.customers.createBalanceTransaction(customerId, { amount: -2, currency: "usd", description: "Final annual membership installment adjustment" });
-          await stripe.subscriptions.update(subscriptionId, { metadata: { final_credit_applied: "true" } });
-        }
-        if (paidInstallments >= 11) await stripe.subscriptions.update(subscriptionId, { cancel_at_period_end: true });
+        if (paidInstallments >= 12) await stripe.subscriptions.update(subscriptionId, { cancel_at_period_end: true });
       }
     }
   }

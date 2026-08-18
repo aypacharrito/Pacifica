@@ -18,6 +18,5 @@ export default async function MembershipPage() {
     const rows = await sql`SELECT id FROM membership_acceptances WHERE clerk_user_id=${userId} AND terms_version=${TERMS_VERSION} LIMIT 1`;
     alreadyAccepted = rows.length > 0;
   } catch {}
-  return <main className="member-page legal-page"><header><Link href="/" className="brand">Pacifica Legal Insurance</Link><UserButton /></header><section><MembershipClient alreadyAccepted={alreadyAccepted} /></section></main>;
+  return <main className="member-page legal-page"><header><Link href="/" className="brand brand-logo" aria-label="Pacifica Legal Insurance home"/><UserButton /></header><section><MembershipClient alreadyAccepted={alreadyAccepted} /></section></main>;
 }
-
