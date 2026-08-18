@@ -29,7 +29,14 @@ export async function POST(request: Request) {
   await sql`INSERT INTO memberships (clerk_user_id,email,status) VALUES (${userId},${email.toLowerCase()},'pending') ON CONFLICT (clerk_user_id) DO UPDATE SET email=EXCLUDED.email,updated_at=now()`;
 
   const stripe = new Stripe(key);
-  const common = { client_reference_id: userId, customer_email: email, success_url: `${base}/api/stripe/confirm?session_id={CHECKOUT_SESSION_ID}`, cancel_url: `${base}/membership?payment=cancelled` };
+  const common = {
+    client_reference_id: userId,
+    customer_email: email,
+    payment_method_types: ["card"] as Stripe.Checkout.SessionCreateParams.PaymentMethodType[],
+    wallet_options: { link: { display: "never" as const } },
+    success_url: `${base}/api/stripe/confirm?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${base}/membership?payment=cancelled`,
+  };
 
   if (paymentOption === "annual") {
     const session = await stripe.checkout.sessions.create({
