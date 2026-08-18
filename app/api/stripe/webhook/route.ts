@@ -20,6 +20,27 @@ export async function POST(request: Request) {
     const userId = session.client_reference_id || session.metadata?.clerk_user_id;
     if (userId) await sql`INSERT INTO memberships (clerk_user_id,email,stripe_customer_id,stripe_subscription_id,status,updated_at) VALUES (${userId},${session.customer_details?.email || ''},${String(session.customer || '')},${String(session.subscription || '')},${session.payment_status === 'paid' ? 'active' : 'pending'},now()) ON CONFLICT (clerk_user_id) DO UPDATE SET email=EXCLUDED.email,stripe_customer_id=EXCLUDED.stripe_customer_id,stripe_subscription_id=EXCLUDED.stripe_subscription_id,status=EXCLUDED.status,updated_at=now()`;
   }
+
+  if (event.type === "invoice.paid") {
+    const invoice = event.data.object as Stripe.Invoice & { subscription?: string | Stripe.Subscription | null };
+    const parentSubscription = invoice.parent?.type === "subscription_details" ? invoice.parent.subscription_details?.subscription : null;
+    const rawSubscription = parentSubscription || invoice.subscription;
+    const subscriptionId = typeof rawSubscription === "string" ? rawSubscription : rawSubscription?.id;
+    if (subscriptionId) {
+      const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+      if (subscription.metadata.billing_plan === "150_then_10x3182_then_3180") {
+        const invoices = await stripe.invoices.list({ subscription: subscriptionId, status: "paid", limit: 100 });
+        const paidInstallments = invoices.data.filter(item => item.billing_reason === "subscription_create" || item.billing_reason === "subscription_cycle").length;
+        if (paidInstallments >= 10 && subscription.metadata.final_credit_applied !== "true") {
+          const customerId = typeof subscription.customer === "string" ? subscription.customer : subscription.customer.id;
+          await stripe.customers.createBalanceTransaction(customerId, { amount: -2, currency: "usd", description: "Final annual membership installment adjustment" });
+          await stripe.subscriptions.update(subscriptionId, { metadata: { final_credit_applied: "true" } });
+        }
+        if (paidInstallments >= 11) await stripe.subscriptions.update(subscriptionId, { cancel_at_period_end: true });
+      }
+    }
+  }
+
   if (event.type === "customer.subscription.updated" || event.type === "customer.subscription.deleted") {
     const subscription = event.data.object as Stripe.Subscription;
     const userId = subscription.metadata.clerk_user_id;
@@ -27,4 +48,3 @@ export async function POST(request: Request) {
   }
   return new Response("ok");
 }
-

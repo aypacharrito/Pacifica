@@ -1,16 +1,16 @@
-export const TERMS_VERSION = "2026-07-16";
+export const TERMS_VERSION = "2026-08-17";
 
 export default function LegalTerms() {
   return <div className="terms-copy">
     <h2>Pacifica Legal Insurance Membership Terms and Conditions</h2>
-    <p><b>Effective and version date:</b> July 16, 2026</p>
+    <p><b>Effective and version date:</b> August 17, 2026</p>
 
     <h3>1. The membership</h3>
     <p>Pacifica provides access to legal-support and case-routing services under the applicable membership plan. Membership is not a promise that every matter will be accepted, covered, resolved, or assigned to an attorney. Coverage is determined separately for each matter under the plan documents in effect when the matter is submitted.</p>
 
     <h3>2. Annual term and recurring installments</h3>
-    <p>The membership price is $600 for a twelve-month term, paid in twelve recurring monthly installments of $50. By enrolling, you authorize Pacifica and its payment processor to charge the payment method you provide $50 each month during the annual term and any properly disclosed renewal term, until cancellation or termination takes effect under these terms and applicable law. Taxes, if any, may be additional.</p>
-    <p>You will receive confirmation of the recurring-payment arrangement. Renewal and cancellation rights are governed by applicable law and the cancellation instructions provided in your account. Cancellation stops the next renewal when timely made; it does not erase charges already incurred or other lawful amounts due for the current term. Pacifica will not impose a renewal or cancellation term prohibited by applicable law.</p>
+    <p>The membership price is $500 for a twelve-month term. You may either pay $500 in full at enrollment or select the installment plan. Under the installment plan, you will be charged $150 at enrollment, followed by ten monthly payments of $31.82 and one final monthly payment of $31.80. The total paid under either option is $500. Taxes, if any, may be additional.</p>
+    <p>By selecting the installment plan, you authorize Pacifica and its payment processor to charge the payment method you provide according to that schedule. The installment plan ends after the final payment unless you separately agree to a properly disclosed renewal term. Renewal and cancellation rights are governed by applicable law and the cancellation instructions provided in your account. Cancellation does not erase charges already incurred or other lawful amounts due for the current term.</p>
 
     <h3>3. When protection begins</h3>
     <p>Membership and eligibility do not begin merely because an account was created, terms were accepted, or a matter was uploaded. Protection begins only after successful enrollment and payment confirmation, subject to any waiting period and written plan requirements. Events, violations, citations, arrests, investigations, disputes, deadlines, or circumstances that occurred, were known, or reasonably should have been known before the applicable effective date are not covered unless Pacifica confirms otherwise in writing.</p>
@@ -49,7 +49,6 @@ export default function LegalTerms() {
     <p>Members may manage billing through their secure account or contact <a href="mailto:pacificalegalinsurance@gmail.com">pacificalegalinsurance@gmail.com</a>. Pacifica will provide a cancellation method consistent with applicable law. Keep confirmation of any cancellation request.</p>
 
     <h3>15. Acceptance</h3>
-    <p>By checking the acceptance box and continuing, you confirm that you are at least 18, have authority to enroll, had an opportunity to read these terms, understand the annual price and recurring monthly charges, and agree to these terms and the incorporated plan documents.</p>
+    <p>By checking the acceptance box and continuing, you confirm that you are at least 18, have authority to enroll, had an opportunity to read these terms, understand the $500 annual price and the payment option you selected, and agree to these terms and the incorporated plan documents.</p>
   </div>;
 }
-
