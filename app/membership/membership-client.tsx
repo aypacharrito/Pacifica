@@ -32,7 +32,7 @@ export default function MembershipClient({ alreadyAccepted }: { alreadyAccepted:
       {!accepted ? <button className="button button-gold payment-cta" onClick={() => setOpen(true)}>Review terms to continue</button> :
       <form action="/api/stripe/checkout" method="post" className="checkout-form">
         <input type="hidden" name="termsAccepted" value="yes" /><input type="hidden" name="termsVersion" value={TERMS_VERSION} /><input type="hidden" name="paymentOption" value={paymentOption} />
-        <label className="final-consent"><input type="checkbox" name="billingConsent" required /> <span>I authorize the selected payment schedule and agree to the annual membership terms.</span></label>
+        <label className="final-consent"><input type="checkbox" name="billingConsent" value="yes" required /> <span>I authorize the selected payment schedule and agree to the annual membership terms.</span></label>
         <button className="button button-gold payment-cta" type="submit">Continue to secure checkout</button>
       </form>}
       <p className="legal-links"><button type="button" onClick={() => setOpen(true)}>Read terms and conditions</button><span>·</span><a href="/deductibles">Deductible terms</a></p>

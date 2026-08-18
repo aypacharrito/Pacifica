@@ -10,7 +10,8 @@ export async function POST(request: Request) {
   const form = await request.formData();
   const paymentOption = form.get("paymentOption");
   if (paymentOption !== "annual" && paymentOption !== "installments") return new Response("Select a payment option.", { status: 400 });
-  if (form.get("termsAccepted") !== "yes" || form.get("billingConsent") !== "on" || form.get("termsVersion") !== TERMS_VERSION) return new Response("You must accept the current membership and payment terms.", { status: 400 });
+  if (form.get("termsAccepted") !== "yes") return new Response("Please review and accept the membership agreement.", { status: 400 });
+  if (form.get("billingConsent") !== "yes") return new Response("Please check the payment authorization box before continuing.", { status: 400 });
 
   const user = await currentUser();
   const email = user?.emailAddresses.find(e => e.id === user.primaryEmailAddressId)?.emailAddress || user?.emailAddresses[0]?.emailAddress;

@@ -11,6 +11,6 @@ Production Next.js application for Pacifica Legal Insurance.
 5. Save its signing secret as `STRIPE_WEBHOOK_SECRET` in Vercel.
 6. Redeploy after environment variables are saved.
 
-The checkout creates both $500 payment choices directly in Stripe, so no Stripe Price ID is required.
+The checkout creates both $529.88 payment choices directly in Stripe, so no Stripe Price ID is required.
 
 Never commit secret keys to GitHub.
