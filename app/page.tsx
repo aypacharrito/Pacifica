@@ -6,7 +6,7 @@ const features = [
   ["✓", "Trusted protection", "Practical legal support when it matters most."],
   ["♙", "Experienced attorneys", "Your matter is routed to the right legal professional."],
   ["▣", "Secure & private", "Your documents stay organized in one protected place."],
-  ["◇", "Clear & transparent", "$529.88 annually—or $50 enrollment plus twelve monthly payments of $39.99."],
+  ["◇", "Clear & transparent", "$529.88 for the first year, including a one-time $50 broker fee. Renews at $479.88 per year."],
 ];
 
 export default async function Home() {

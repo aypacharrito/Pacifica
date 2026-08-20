@@ -1,16 +1,18 @@
-export const TERMS_VERSION = "2026-08-18";
+export const TERMS_VERSION = "2026-08-20";
 
 export default function LegalTerms() {
   return <div className="terms-copy">
     <h2>Pacifica Legal Insurance Membership Terms and Conditions</h2>
-    <p><b>Effective and version date:</b> August 18, 2026</p>
+    <p><b>Effective and version date:</b> August 20, 2026</p>
 
     <h3>1. The membership</h3>
     <p>Pacifica provides access to legal-support and case-routing services under the applicable membership plan. Membership is not a promise that every matter will be accepted, covered, resolved, or assigned to an attorney. Coverage is determined separately for each matter under the plan documents in effect when the matter is submitted.</p>
 
-    <h3>2. Annual term and recurring installments</h3>
-    <p>The membership price is $529.88 for a twelve-month term. You may either pay $529.88 in full at enrollment or select the installment plan. Under the installment plan, you will be charged a one-time $50 enrollment fee plus the first monthly installment of $39.99 at enrollment, for an initial charge of $89.99. Eleven additional monthly installments of $39.99 will then be charged. The total paid under either option is $529.88. Taxes, if any, may be additional.</p>
-    <p>By selecting the installment plan, you authorize Pacifica and its payment processor to charge the payment method you provide $89.99 at enrollment and $39.99 monthly for the following eleven months. The installment plan ends after the twelfth monthly installment unless you separately agree to a properly disclosed renewal term. Renewal and cancellation rights are governed by applicable law and the cancellation instructions provided in your account. Cancellation does not erase charges already incurred or other lawful amounts due for the current term.</p>
+    <h3>2. Annual term, broker fee, and automatic renewal</h3>
+    <p>The recurring membership price is $479.88 for each twelve-month term. A one-time $50 broker fee is charged only at initial enrollment, making the first-year total $529.88. Taxes, if any, may be additional.</p>
+    <p>If you select annual billing, you authorize Pacifica and its payment processor to charge $529.88 at enrollment, consisting of the $479.88 annual membership price plus the one-time $50 broker fee. Unless canceled, the membership automatically renews every twelve months at $479.88, without another broker fee.</p>
+    <p>If you select monthly billing, you authorize an initial charge of $89.99, consisting of the first $39.99 monthly installment plus the one-time $50 broker fee. You will then be charged $39.99 each month. The first twelve months total $529.88; each subsequent twelve-month renewal period totals $479.88 through twelve monthly charges of $39.99. Monthly billing continues automatically until canceled.</p>
+    <p>Renewal and cancellation rights are governed by applicable law and the cancellation instructions provided in your account. Cancellation stops future renewals or installments as permitted by the applicable plan and law, but does not erase charges already incurred or other lawful amounts due.</p>
 
     <h3>3. When protection begins</h3>
     <p>Membership and eligibility do not begin merely because an account was created, terms were accepted, or a matter was uploaded. Protection begins only after successful enrollment and payment confirmation, subject to any waiting period and written plan requirements. Events, violations, citations, arrests, investigations, disputes, deadlines, or circumstances that occurred, were known, or reasonably should have been known before the applicable effective date are not covered unless Pacifica confirms otherwise in writing.</p>
@@ -49,6 +51,6 @@ export default function LegalTerms() {
     <p>Members may manage billing through their secure account or contact <a href="mailto:pacificalegalinsurance@gmail.com">pacificalegalinsurance@gmail.com</a>. Pacifica will provide a cancellation method consistent with applicable law. Keep confirmation of any cancellation request.</p>
 
     <h3>15. Acceptance</h3>
-    <p>By checking the acceptance box and continuing, you confirm that you are at least 18, have authority to enroll, had an opportunity to read these terms, understand the $529.88 annual price and the payment option you selected, and agree to these terms and the incorporated plan documents.</p>
+    <p>By checking the acceptance box and continuing, you confirm that you are at least 18, have authority to enroll, had an opportunity to read these terms, understand the $529.88 first-year price, the $479.88 annual renewal price, the recurring payment option you selected, and agree to these terms and the incorporated plan documents.</p>
   </div>;
 }

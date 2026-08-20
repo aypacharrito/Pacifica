@@ -41,9 +41,13 @@ export async function POST(request: Request) {
   if (paymentOption === "annual") {
     const session = await stripe.checkout.sessions.create({
       ...common,
-      mode: "payment",
-      line_items: [{ price_data: { currency: "usd", unit_amount: 52988, product_data: { name: "Pacifica annual membership — paid in full" } }, quantity: 1 }],
-      metadata: { clerk_user_id: userId, terms_version: TERMS_VERSION, billing_plan: "annual_52988" },
+      mode: "subscription",
+      line_items: [
+        { price_data: { currency: "usd", unit_amount: 47988, recurring: { interval: "year" }, product_data: { name: "Pacifica annual membership" } }, quantity: 1 },
+        { price_data: { currency: "usd", unit_amount: 5000, product_data: { name: "One-time broker fee" } }, quantity: 1 },
+      ],
+      metadata: { clerk_user_id: userId, terms_version: TERMS_VERSION, billing_plan: "broker_50_plus_annual_47988" },
+      subscription_data: { metadata: { clerk_user_id: userId, terms_version: TERMS_VERSION, billing_plan: "broker_50_plus_annual_47988" } },
     });
     redirect(session.url!);
   }
@@ -52,11 +56,11 @@ export async function POST(request: Request) {
     ...common,
     mode: "subscription",
     line_items: [
-      { price_data: { currency: "usd", unit_amount: 3999, recurring: { interval: "month" }, product_data: { name: "Pacifica annual membership installment" } }, quantity: 1 },
-      { price_data: { currency: "usd", unit_amount: 5000, product_data: { name: "Enrollment fee" } }, quantity: 1 },
+      { price_data: { currency: "usd", unit_amount: 3999, recurring: { interval: "month" }, product_data: { name: "Pacifica monthly membership installment" } }, quantity: 1 },
+      { price_data: { currency: "usd", unit_amount: 5000, product_data: { name: "One-time broker fee" } }, quantity: 1 },
     ],
-    metadata: { clerk_user_id: userId, terms_version: TERMS_VERSION, billing_plan: "50_plus_12x3999" },
-    subscription_data: { metadata: { clerk_user_id: userId, terms_version: TERMS_VERSION, billing_plan: "50_plus_12x3999" } },
+    metadata: { clerk_user_id: userId, terms_version: TERMS_VERSION, billing_plan: "broker_50_plus_monthly_3999" },
+    subscription_data: { metadata: { clerk_user_id: userId, terms_version: TERMS_VERSION, billing_plan: "broker_50_plus_monthly_3999" } },
   });
   redirect(session.url!);
 }

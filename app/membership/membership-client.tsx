@@ -20,19 +20,19 @@ export default function MembershipClient({ alreadyAccepted }: { alreadyAccepted:
         <label className={paymentOption === "annual" ? "payment-choice selected" : "payment-choice"}>
           <input type="radio" name="displayPaymentOption" checked={paymentOption === "annual"} onChange={() => setPaymentOption("annual")} />
           <span className="choice-check">✓</span><span className="choice-kicker">PAY ONCE</span><strong>Annual payment</strong>
-          <span className="choice-price"><sup>$</sup>529<small>.88</small></span><span className="choice-detail">One secure payment today</span><span className="choice-note">No monthly billing</span>
+          <span className="choice-price"><sup>$</sup>479<small>.88/yr</small></span><span className="choice-detail">Plus a one-time $50 broker fee</span><span className="choice-note">$529.88 today, then $479.88 each year</span>
         </label>
         <label className={paymentOption === "installments" ? "payment-choice selected" : "payment-choice"}>
           <input type="radio" name="displayPaymentOption" checked={paymentOption === "installments"} onChange={() => setPaymentOption("installments")} />
           <span className="choice-check">✓</span><span className="choice-kicker">PAY MONTHLY</span><strong>Monthly plan</strong>
-          <span className="choice-price"><sup>$</sup>39<small>.99/mo</small></span><span className="choice-detail">Plus a one-time $50 enrollment fee</span><span className="choice-note">$89.99 today, then eleven payments of $39.99</span>
+          <span className="choice-price"><sup>$</sup>39<small>.99/mo</small></span><span className="choice-detail">Plus a one-time $50 broker fee</span><span className="choice-note">$89.99 today, then $39.99 monthly</span>
         </label>
       </div>
-      <div className="payment-summary"><span>Selected today</span><strong>{paymentOption === "annual" ? "$529.88 paid in full" : "$89.99 initial payment"}</strong><small>{paymentOption === "annual" ? "Covers the complete 12-month term" : "$39.99 monthly for the following 11 months"}</small></div>
+      <div className="payment-summary"><span>Selected today</span><strong>{paymentOption === "annual" ? "$529.88 initial annual payment" : "$89.99 initial payment"}</strong><small>{paymentOption === "annual" ? "Renews at $479.88 every 12 months" : "Then $39.99 monthly · $479.88 per renewal year"}</small></div>
       {!accepted ? <button className="button button-gold payment-cta" onClick={() => setOpen(true)}>Review terms to continue</button> :
       <form action="/api/stripe/checkout" method="post" className="checkout-form">
         <input type="hidden" name="termsAccepted" value="yes" /><input type="hidden" name="termsVersion" value={TERMS_VERSION} /><input type="hidden" name="paymentOption" value={paymentOption} />
-        <label className="final-consent"><input type="checkbox" name="billingConsent" value="yes" required /> <span>I authorize the selected payment schedule and agree to the annual membership terms.</span></label>
+        <label className="final-consent"><input type="checkbox" name="billingConsent" value="yes" required /> <span>I authorize the selected recurring payment schedule and agree to the annual membership terms.</span></label>
         <button className="button button-gold payment-cta" type="submit">Continue to secure checkout</button>
       </form>}
       <p className="legal-links"><button type="button" onClick={() => setOpen(true)}>Read terms and conditions</button><span>·</span><a href="/deductibles">Deductible terms</a></p>
@@ -40,7 +40,7 @@ export default function MembershipClient({ alreadyAccepted }: { alreadyAccepted:
     {open && <div className="terms-overlay" role="dialog" aria-modal="true" aria-labelledby="terms-title"><div className="terms-modal">
       <div className="terms-modal-head"><div><small>MEMBERSHIP AGREEMENT</small><h2 id="terms-title">Terms and conditions</h2></div>{alreadyAccepted && <button className="modal-close" onClick={() => setOpen(false)} aria-label="Close">×</button>}</div>
       <div className="terms-scroll"><LegalTerms /></div>
-      <div className="terms-accept"><label><input type="checkbox" checked={checked} onChange={e => setChecked(e.target.checked)} /> <span>I have read and agree to the $529.88 annual membership terms, payment options, deductibles, exclusions, and cancellation provisions.</span></label><button className="button button-gold" disabled={!checked} onClick={accept}>Accept and continue</button></div>
+      <div className="terms-accept"><label><input type="checkbox" checked={checked} onChange={e => setChecked(e.target.checked)} /> <span>I have read and agree to the $529.88 first-year price, $479.88 annual renewal price, recurring payment option, deductibles, exclusions, and cancellation provisions.</span></label><button className="button button-gold" disabled={!checked} onClick={accept}>Accept and continue</button></div>
     </div></div>}
     <style jsx>{`
       .payment-shell{max-width:920px!important;padding:46px!important;border-radius:22px!important;background:linear-gradient(145deg,#0a1016,#111923)!important;border:1px solid #d7ad5c55!important;box-shadow:0 28px 70px #0006!important}.payment-intro{text-align:center;max-width:680px;margin:0 auto 30px}.payment-intro h1{font-size:46px!important;line-height:1.08!important;margin:12px 0 14px!important}.payment-intro>p:last-child{color:#aab6c1!important;font-size:16px!important}
